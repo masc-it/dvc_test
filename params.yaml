@@ -2,5 +2,5 @@ train:
   epochs: 10
   batch_size: 128
 model:
-  optimizer: SGD
-  units1: 50
+  optimizer: adam
+  units1: 30

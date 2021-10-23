@@ -12,20 +12,22 @@ stages:
       size: 4683
     params:
       params.yaml:
+        model.optimizer: adam
+        model.units1: 30
         train.batch_size: 128
         train.epochs: 10
     outs:
     - path: metrics/metrics.json
-      md5: d25678f6e2f88ca6c5f215bbfa928a74
-      size: 1698
+      md5: 1f82fa45f7072088ab11177677334804
+      size: 1697
     - path: metrics/results.json
-      md5: d25138661c18c0e746feae455cb5f62c
-      size: 59
+      md5: 07b8b32a76585cead01789b0b3043949
+      size: 50
     - path: weights/best_loss.h5
-      md5: 14c0eef91e3756a331e2095827152604
-      size: 27568
+      md5: ab3c5031a9871c7bf2060c912e87b4d0
+      size: 24368
       isexec: true
     - path: weights/best_val_loss.h5
-      md5: 14c0eef91e3756a331e2095827152604
-      size: 27568
+      md5: 7a85026f677c70eca2b97f9ce5b08ccc
+      size: 24368
       isexec: true

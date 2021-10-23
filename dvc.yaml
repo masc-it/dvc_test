@@ -7,6 +7,9 @@ stages:
     params:
     - train.epochs
     - train.batch_size
+    - model.units1
+    - model.optimizer
+
     outs:
     - weights/best_loss.h5
     - weights/best_val_loss.h5
