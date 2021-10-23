@@ -1,0 +1,31 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python3 train.py
+    deps:
+    - path: dataset/
+      md5: 81d8575f70d3d17c15ea6b6ed93a0266.dir
+      size: 152119
+      nfiles: 3
+    - path: train.py
+      md5: 13c88d9407efbcaaf109f601f9ed365e
+      size: 4660
+    params:
+      params.yaml:
+        train.batch_size: 128
+        train.epochs: 10
+    outs:
+    - path: metrics/metrics.json
+      md5: ca755a8efbd886305756c2124d328afa
+      size: 1677
+    - path: metrics/results.json
+      md5: 8dbef1ab85369a6cee15f6bc9a13a47e
+      size: 59
+    - path: weights/best_loss.h5
+      md5: 268e3ffc456e4236311cf601ef188163
+      size: 31216
+      isexec: true
+    - path: weights/best_val_loss.h5
+      md5: 268e3ffc456e4236311cf601ef188163
+      size: 31216
+      isexec: true
