@@ -1,0 +1,18 @@
+stages:
+  train:
+    cmd: python3 train.py
+    deps:
+    - dataset/
+    - train.py
+    params:
+    - train.epochs
+    - train.batch_size
+    outs:
+    - weights/best_loss.h5
+    - weights/best_val_loss.h5
+    metrics:
+    - metrics/results.json:
+        cache: false
+    plots:
+    - metrics/metrics.json:
+        cache: false

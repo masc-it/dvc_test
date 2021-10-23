@@ -1,0 +1,5 @@
+outs:
+- md5: 1c5b891f1003e3ebef406e6f53c31153
+  size: 152006
+  path: creditors.csv
+  isexec: true
