@@ -16,16 +16,16 @@ stages:
         train.epochs: 10
     outs:
     - path: metrics/metrics.json
-      md5: ca755a8efbd886305756c2124d328afa
-      size: 1677
+      md5: b540f521de4895d7eee1e4b4b557eb92
+      size: 1646
     - path: metrics/results.json
-      md5: 8dbef1ab85369a6cee15f6bc9a13a47e
+      md5: fa954ac4d5a34c87d5a35da6ffa4e9d6
       size: 59
     - path: weights/best_loss.h5
-      md5: 268e3ffc456e4236311cf601ef188163
+      md5: db86104c1c0dbb563b397015b1d2d1f8
       size: 31216
       isexec: true
     - path: weights/best_val_loss.h5
-      md5: 268e3ffc456e4236311cf601ef188163
+      md5: db86104c1c0dbb563b397015b1d2d1f8
       size: 31216
       isexec: true
