@@ -154,7 +154,7 @@ def build_model():
 	model = models.Sequential()
 	model.add(layers.Dense(20, input_dim=20, activation='relu'))
 	#model.add(layers.Dropout(0.1))
-	model.add(layers.Dense(60, activation='relu'))
+	model.add(layers.Dense(params["model"]["units1"], activation='relu'))
 	model.add(layers.Dropout(0.4))
 	model.add(layers.Dense(20, activation='relu'))
 	model.add(layers.Dense(1, activation='sigmoid'))
