@@ -3,31 +3,70 @@ stages:
   train:
     cmd: python3 train.py
     deps:
-    - path: dataset/
-      md5: 81d8575f70d3d17c15ea6b6ed93a0266.dir
-      size: 152119
-      nfiles: 3
+    - path: dataset/creditors_train.csv
+      md5: 046c481318ad5aac9079d8a80aa8552e
+      size: 37707
     - path: train.py
-      md5: f249505be595faa1799f4c10a8282236
-      size: 4683
+      md5: d5329fdc49d24f47f5490fdb1042ced7
+      size: 3284
     params:
       params.yaml:
         model.optimizer: adam
-        model.units1: 30
-        train.batch_size: 128
-        train.epochs: 10
+        model.units1: 40
+        train.batch_size: 8
+        train.epochs: 20
     outs:
     - path: metrics/metrics.json
-      md5: 1f82fa45f7072088ab11177677334804
-      size: 1697
+      md5: d74ff805cce5c93f5135247876a06cfc
+      size: 20870
     - path: metrics/results.json
-      md5: 07b8b32a76585cead01789b0b3043949
-      size: 50
+      md5: e548c50bb107c54190f8f9b378fb7d1c
+      size: 55
     - path: weights/best_loss.h5
-      md5: ab3c5031a9871c7bf2060c912e87b4d0
-      size: 24368
+      md5: ed8271b2c5ba855071d3e3a925b6a8bd
+      size: 38832
       isexec: true
     - path: weights/best_val_loss.h5
-      md5: 7a85026f677c70eca2b97f9ce5b08ccc
-      size: 24368
+      md5: 20d736b7b00fb7fadce8e2f912503b88
+      size: 38832
       isexec: true
+  prepare_data:
+    cmd: python3 prepare.py
+    deps:
+    - path: dataset/creditors.csv
+      md5: 1c5b891f1003e3ebef406e6f53c31153
+      size: 152006
+    - path: prepare.py
+      md5: 65a100bd38b44b8dacdbaf2cd671ef7b
+      size: 726
+    outs:
+    - path: dataset/creditors_test.csv
+      md5: a3bcfcd2498da53e4eb636a80140a28f
+      size: 9632
+      isexec: true
+    - path: dataset/creditors_train.csv
+      md5: 046c481318ad5aac9079d8a80aa8552e
+      size: 37707
+      isexec: true
+  test:
+    cmd: python3 test.py
+    deps:
+    - path: dataset/creditors_test.csv
+      md5: a3bcfcd2498da53e4eb636a80140a28f
+      size: 9632
+    - path: test.py
+      md5: 8a0b5ae7420d881dc5a8f4bb2610c05a
+      size: 1622
+    - path: weights/best_val_loss.h5
+      md5: 20d736b7b00fb7fadce8e2f912503b88
+      size: 38832
+    params:
+      params.yaml:
+        model.optimizer: adam
+        model.units1: 40
+        train.batch_size: 8
+        train.epochs: 20
+    outs:
+    - path: metrics/results_test.json
+      md5: b010a3cf0f76254cd7841f5ea5cdf6ca
+      size: 32

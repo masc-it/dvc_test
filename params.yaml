@@ -1,6 +1,6 @@
 train:
-  epochs: 10
-  batch_size: 128
+  epochs: 20
+  batch_size: 8
 model:
   optimizer: adam
-  units1: 30
+  units1: 40
