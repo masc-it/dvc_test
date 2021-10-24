@@ -1,8 +1,16 @@
 stages:
+  prepare_data:
+    cmd: python3 prepare.py
+    deps:
+    - dataset/creditors.csv
+    - prepare.py
+    outs:
+    - dataset/creditors_ready.csv
+
   train:
     cmd: python3 train.py
     deps:
-    - dataset/
+    - dataset/creditors_ready.csv
     - train.py
     params:
     - train.epochs
