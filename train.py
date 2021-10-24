@@ -1,12 +1,8 @@
-from sklearn.preprocessing import LabelEncoder
-
-from sklearn.compose import ColumnTransformer 
 import pandas as pd
 import numpy as np
-import sys
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from keras import layers, models, optimizers, utils, callbacks, backend, regularizers
+from keras import layers, models,  callbacks
 import tensorflow as tf
 import json
 import os
@@ -47,9 +43,11 @@ class CustomCallback(callbacks.Callback):
 
 
 def scheduler(epoch, lr):
-  lr_ = lr
-  if epoch % 5 == 0:
-    lr_ = lr_ * tf.math.exp(-0.10)
+  lr_ = 1e-3
+  if epoch > 10:
+    return lr * 0.9
+  elif epoch > 5:
+    return 1e-4
 
   return lr_
 
@@ -72,31 +70,20 @@ cs = [
 
   ]
 
-dataset = pd.read_csv("dataset/creditors_ready.csv")
+dataset = pd.read_csv("dataset/creditors_train.csv")
 df = pd.DataFrame(dataset)
 
 labels = df["class"]
 data_ = df.drop("class", axis=1)
 
-training_set, test_set, training_labels, test_labels = train_test_split(data_, labels, test_size=0.20)
+training_set = np.asarray(data_)
 
-training_set = np.asarray(training_set)
-test_set = np.asarray(test_set)
-
-training_labels = np.asarray(training_labels)
-test_labels = np.asarray(test_labels)
-
-print(training_labels.shape)
-print(test_labels.shape)
-
-print(np.count_nonzero(training_labels == 0))
-print(np.count_nonzero(test_labels == 0))
+training_labels = np.asarray(labels)
 
 scaler = StandardScaler()
 
 training_set = scaler.fit_transform(training_set)
 
-test_set = scaler.fit_transform(test_set)
 
 def build_model():
   model = models.Sequential()

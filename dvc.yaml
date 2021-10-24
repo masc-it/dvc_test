@@ -5,12 +5,13 @@ stages:
     - dataset/creditors.csv
     - prepare.py
     outs:
-    - dataset/creditors_ready.csv
+    - dataset/creditors_train.csv
+    - dataset/creditors_test.csv
 
   train:
     cmd: python3 train.py
     deps:
-    - dataset/creditors_ready.csv
+    - dataset/creditors_train.csv
     - train.py
     params:
     - train.epochs
@@ -26,4 +27,19 @@ stages:
         cache: false
     plots:
     - metrics/metrics.json:
+        cache: false
+  test:
+    cmd: python3 test.py
+    deps:
+    - dataset/creditors_test.csv
+    - weights/best_val_loss.h5
+    - test.py
+    params:
+    - train.epochs
+    - train.batch_size
+    - model.units1
+    - model.optimizer
+
+    metrics:
+    - metrics/results_test.json:
         cache: false
